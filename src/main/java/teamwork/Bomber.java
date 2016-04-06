@@ -1,9 +1,10 @@
 package teamwork;
 
-/**
- * Created by sergey on 06.04.16.
- */
 public class Bomber {
+
+    int[][] fillField(int countMine) {
+        return new int[1][1];
+    }
 
 
 }
