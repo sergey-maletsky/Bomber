@@ -3,6 +3,7 @@ package teamwork;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -21,7 +22,7 @@ public class testBomber {
     }
 
     @Test
-    public void checkFillField(){
+    public void testCheckFillField(){
         Bomber bomber = new Bomber(10,10);
         int[][] field = bomber.fillField(25);
         assertEquals(10,field.length);
@@ -35,5 +36,33 @@ public class testBomber {
         }
         assertEquals(25,sum);
 
+    }
+
+    @Test
+    public void testFillScreen() {
+        Bomber bomber = new Bomber();
+        bomber.fillField(25);
+        char[][] screenField = bomber.fillScreen();
+    }
+
+    @Test
+    public void testCheckWinner() {
+        Bomber bomber = new Bomber();
+        bomber.fillField(25);
+
+        int counter = 0;
+        while (counter <= 10){
+            int x = new Random().nextInt(10);
+            int y = new Random().nextInt(10);
+            if(bomber.getField()[x][y] == 0) {
+                counter++;
+                if(counter < 10) {
+                    assertEquals("Loser!", bomber.checkShot(x, y));
+                }
+                else {
+                    assertEquals("Winner!", bomber.checkShot(x, y));
+                }
+            }
+        }
     }
 }
