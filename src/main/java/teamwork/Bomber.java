@@ -7,17 +7,20 @@ public class Bomber {
     private int x;
     private int y;
     private int[][] field;
+    private int countShot;
 
     public Bomber() {
         this.x = 10;
         this.y = 10;
         this.field = new int[x][y];
+        countShot = 0;
     }
 
     public Bomber(int x, int y) {
         this.x = x;
         this.y = y;
         this.field = new int[x][y];
+        countShot = 0;
     }
 
     public static void main(String[] args) {
@@ -26,6 +29,7 @@ public class Bomber {
     }
 
     int[][] fillField(int countMine) {
+        countShot = 0;
         Random mine = new Random();
         int counter = 0;
 
@@ -44,6 +48,17 @@ public class Bomber {
             }
         }
         return field;
+    }
+
+    public String checkShot(int x, int y) {
+        countShot++;
+        if (field[x][y] == 1) {
+            return "Detonation";
+        }
+        if (field[x][y] == 0 && countShot == 10) {
+            return "Winner!";
+        }
+        return "Loser!";
     }
 
 

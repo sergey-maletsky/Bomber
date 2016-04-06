@@ -38,12 +38,12 @@ public class testBomber {
 
     }
 
-    @Test
-    public void testFillScreen() {
-        Bomber bomber = new Bomber();
-        bomber.fillField(25);
-        char[][] screenField = bomber.fillScreen();
-    }
+//    @Test
+//    public void testFillScreen() {
+//        Bomber bomber = new Bomber();
+//        bomber.fillField(25);
+//        char[][] screenField = bomber.fillScreen();
+//    }
 
     @Test
     public void testCheckWinner() {
@@ -51,7 +51,7 @@ public class testBomber {
         bomber.fillField(25);
 
         int counter = 0;
-        while (counter <= 10){
+        while (counter < 10){
             int x = new Random().nextInt(10);
             int y = new Random().nextInt(10);
             if(bomber.getField()[x][y] == 0) {
