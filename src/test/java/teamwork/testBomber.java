@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
 
@@ -38,13 +39,6 @@ public class testBomber {
 
     }
 
-//    @Test
-//    public void testFillScreen() {
-//        Bomber bomber = new Bomber();
-//        bomber.fillField(25);
-//        char[][] screenField = bomber.fillScreen();
-//    }
-
     @Test
     public void testCheckWinner() {
         Bomber bomber = new Bomber();
@@ -57,7 +51,7 @@ public class testBomber {
             if(bomber.getField()[x][y] == 0) {
                 counter++;
                 if(counter < 10) {
-                    assertEquals("Loser!", bomber.checkShot(x, y));
+                    assertEquals("Miss!", bomber.checkShot(x, y));
                 }
                 else {
                     assertEquals("Winner!", bomber.checkShot(x, y));
