@@ -9,33 +9,21 @@ public class Bomber {
     private int x;
     private int y;
     private int[][] field;
-    private List<String> checkedFields;
-    private int countShot;
-    private static final String DETONATION = "Detonation";
-    private static final String WINNER = "Winner!";
-    private static final String MISS = "GOOD WAY!";
-    private static final String AGAIN = "Again";
+    private List<String> checkedFields = new ArrayList<String>();
+    private int countShot = 0;
+    public static final String DETONATION = "Detonation";
+    public static final String WINNER = "Winner!";
+    public static final String MISS = "GOOD WAY!";
+    public static final String AGAIN = "Again";
 
     public Bomber() {
-        this.x = 10;
-        this.y = 10;
-        this.field = new int[x][y];
-        this.checkedFields = new ArrayList<String>();
-        countShot = 0;
+        this(10, 10);
     }
 
     public Bomber(int x, int y) {
         this.x = x;
         this.y = y;
         this.field = new int[x][y];
-        this.checkedFields = new ArrayList<String>();
-        countShot = 0;
-    }
-
-    public static void main(String[] args) {
-        Bomber bomber = new Bomber();
-        bomber.fillField(25);
-        bomber.init();
     }
 
     public int[][] fillField(int countMine) {
@@ -61,18 +49,18 @@ public class Bomber {
     }
 
     public String checkShot(int x, int y) {
-        if(checkedFields.contains(new String(x + "" + y))) {
-            return "Again";
+        if (checkedFields.contains(new String(x + "" + y))) {
+            return AGAIN;
         }
         checkedFields.add(new String(x + "" + y));
         countShot++;
         if (field[x][y] == 1) {
-            return "Detonation";
+            return DETONATION;
         }
         if (field[x][y] == 0 && countShot == 10) {
-            return "Winner!";
+            return WINNER;
         }
-        return "GOOD WAY!";
+        return MISS;
     }
 
     public void init() {
@@ -83,12 +71,11 @@ public class Bomber {
             try {
                 char[] xy = parseUserData(in.next(Pattern.compile("\\[[0-9],[0-9]\\]")));
                 String result = checkShot(Character.getNumericValue(xy[0]), Character.getNumericValue(xy[1]));
-                if(result.equals(AGAIN)) {
+                if (result.equals(AGAIN)) {
                     --i;
                     System.out.println("Вы попали в то же место. Выстрел не считается.");
                     continue;
-                }
-                else if(result.equals(DETONATION) || result.equals(WINNER)) {
+                } else if (result.equals(DETONATION) || result.equals(WINNER)) {
                     System.out.print("\n\n\n");
                     renderAll();
                     System.out.print("\n\n\n");
@@ -113,7 +100,7 @@ public class Bomber {
         return xy;
     }
 
-    private void render() {
+    public void render() {
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
                 if (checkedFields.contains(new String(i + "" + j))) {
@@ -157,5 +144,11 @@ public class Bomber {
 
     public int[][] getField() {
         return field;
+    }
+
+    public static void main(String[] args) {
+        Bomber bomber = new Bomber();
+        bomber.fillField(25);
+        bomber.init();
     }
 }
